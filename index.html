@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DRAMMIS — In arrivo</title>
+<meta name="description" content="DRAMMIS. La maison arriva presto." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#0C0B08; --fg:#FAFAF5; --muted:#9a9488; --gold:#D4B03A;
+    --line:rgba(255,255,255,.14);
+    --ease:cubic-bezier(.19,1,.22,1);
+  }
+  html,body{height:100%}
+  body{
+    font-family:'Urbanist',system-ui,sans-serif;background:var(--bg);color:var(--fg);
+    min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    position:relative;overflow-x:hidden;padding:clamp(50px,9vh,110px) 20px clamp(40px,6vh,72px);text-align:center;
+  }
+  .glow{position:fixed;inset:0;z-index:-1;overflow:hidden}
+  .glow span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.32}
+  .glow span:nth-child(1){width:60vmax;height:60vmax;background:#3a2f12;top:-20%;left:-15%}
+  .glow span:nth-child(2){width:50vmax;height:50vmax;background:#4a3a1a;bottom:-25%;right:-10%}
+  .grain{position:fixed;inset:0;z-index:-1;opacity:.05;pointer-events:none;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  .hero-row{display:flex;justify-content:center;margin-bottom:-30px}
+  .hero-row .logo{height:clamp(84px,14vw,180px);width:auto;filter:brightness(0) invert(1);
+    opacity:0;animation:rise .9s var(--ease) .3s forwards}
+
+  h1{font-weight:800;font-size:clamp(2.5rem,8vw,5.2rem);line-height:.97;letter-spacing:-.01em;margin-bottom:.5rem;
+    text-wrap:balance;opacity:0;animation:rise .9s var(--ease) .68s forwards}
+  p.sub{color:var(--muted);font-size:clamp(.95rem,1.6vw,1.15rem);line-height:1.65;max-width:480px;margin:0 auto clamp(10px,1.8vh,16px);
+    opacity:0;animation:rise .9s var(--ease) .8s forwards}
+
+  form{display:flex;align-items:center;gap:0;width:100%;max-width:400px;border:1px solid var(--line);border-radius:50px;
+    padding:.35rem .35rem .35rem 1.4rem;background:rgba(255,255,255,.04);
+    opacity:0;animation:rise .9s var(--ease) .92s forwards}
+  form input{flex:1;background:none;border:none;outline:none;color:var(--fg);font-family:inherit;font-size:16px;min-width:0}
+  form input::placeholder{color:var(--muted)}
+  form input:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+  form button{flex-shrink:0;background:var(--gold);color:#0C0B08;border:none;border-radius:50px;padding:.85rem 1.5rem;
+    font-family:inherit;font-weight:700;font-size:.85rem;cursor:pointer;transition:transform .3s var(--ease),background .3s}
+  form button:hover{transform:scale(1.04)}
+  form button:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+  .msg{color:var(--gold);font-size:.9rem;font-weight:500}
+
+  .social{margin-top:clamp(8px,1.4vh,12px);display:flex;gap:1.8rem;opacity:0;animation:rise .9s var(--ease) 1.02s forwards}
+  .social a{color:var(--fg);font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;
+    padding-bottom:3px;border-bottom:1px solid var(--line);transition:color .3s,border-color .3s}
+  .social a:hover{color:var(--gold);border-color:var(--gold)}
+
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  @media(prefers-reduced-motion:reduce){
+    .hero-row .logo,h1,p.sub,form,.social{animation:none;opacity:1}
+  }
+  @media(max-width:480px){
+    body{justify-content:space-between;padding:16px 20px 14px;min-height:100svh}
+    .hero-row{margin-bottom:0}
+    .hero-row .logo{height:clamp(54px,15vw,76px)}
+    h1{margin-bottom:0}
+    p.sub{margin:0 auto}
+    .social{margin-top:0}
+    form{padding:.3rem .3rem .3rem 1.1rem}
+    form button{padding:.75rem 1.2rem;font-size:.78rem}
+  }
+</style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="glow"><span></span><span></span></div>
+
+  <div class="hero-row">
+    <img class="logo" src="assets/logo.png" alt="DRAMMIS" />
+  </div>
+
+  <h1>In arrivo.</h1>
+  <p class="sub">Una maison italiana tra alta sartoria e streetwear. LUMA e ICHI ti aspettano — lascia la tua email e sarai il primo a saperlo.</p>
+
+  <form id="notifyForm">
+    <input type="email" id="notifyEmail" placeholder="La tua email" required autocomplete="email" />
+    <button type="submit">Avvisami</button>
+  </form>
+
+  <div class="social">
+    <a href="https://www.instagram.com/drammis_ita" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://www.tiktok.com/@drammis_ita" target="_blank" rel="noopener noreferrer">TikTok</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    const supa = window.supabase.createClient(
+      'https://lyflfedxiosvayxjttzt.supabase.co',
+      'sb_publishable_QDVY9dfdfWN6hmPbcY2YiQ_u990NtPE'
+    );
+    document.getElementById('notifyForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const email = document.getElementById('notifyEmail').value.trim().toLowerCase();
+      supa.from('newsletter_subscribers').insert({ email })
+        .then(function () {})
+        .catch(function () {})
+        .finally(function () {
+          form.outerHTML = '<p class="msg">Fatto — ti scriveremo appena apriamo.</p>';
+        });
+    });
+  </script>
+</body>
+</html>
